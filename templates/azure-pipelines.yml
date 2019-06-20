@@ -15,8 +15,8 @@ steps:
     resourceGroupName: $(RESOURCE_GROUP_NAME)
     location: $(RG_LOCATION)
     templateLocation: Linked artifact
-    csmFile: '/templates/azuredeploy.json'
-    csmParametersFile: '/templates/azuredeploy.parameters.json'
+    csmFile: 'templates/azuredeploy.json'
+    csmParametersFile: 'templates/azuredeploy.parameters.json'
     deploymentMode: Validation
   condition: always()
 - task: AzureCLI@1
