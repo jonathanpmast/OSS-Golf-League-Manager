@@ -12,6 +12,7 @@ steps:
   inputs:
     azureSubscription: $(AZURE_SUBSCRIPTION)
     resourceGroupName: $(RESOURCE_GROUP_NAME)
+    location: $(RG_LOCATION)
     templateLocation: Linked artifact
     deploymentMode: Validation
     csmFile: '/arm/azuredeploy.json'
