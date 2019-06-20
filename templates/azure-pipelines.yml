@@ -1,0 +1,18 @@
+pool:
+      vmImage: 'VS2017-Win2016'
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - deploy/*
+steps:
+- task: AzureResourceGroupDeployment@2
+  inputs:
+    azureSubscription: $(AZURE_SUBSCRIPTION)
+    resourceGroupName: $(RESOURCE_GROUP_NAME)
+    templateLocation: Linked artifact
+    deploymentMode: Validation
+    csmFile: '/arm/azuredeploy.json'
+    csmParametersFile: '/arm/azuredeploy.parameters.json'
