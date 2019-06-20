@@ -25,13 +25,7 @@ steps:
     azureSubscription: $(AZURE_SUBSCRIPTION)
     scriptLocation: inlineScript
     inlineScript: 'az group delete -n $(RESOURCE_GROUP_NAME) --yes'
-- task: ArchiveFiles@2
-  displayName: "Archive files"
-  inputs:
-    rootFolderOrFile: "$(System.DefaultWorkingDirectory)/templates"
-    includeRootFolder: false
-    archiveFile: "$(System.DefaultWorkingDirectory)/templates/build$(Build.BuildId).zip"
 - task: PublishPipelineArtifact@1
   inputs:
     artifact: 'templates-drop'
-    path: '$(System.DefaultWorkingDirectory)/templates/build$(Build.BuildId).zip'
+    path: '$(System.DefaultWorkingDirectory)/templates/*.json'
