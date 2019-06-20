@@ -1,5 +1,12 @@
 pool:
       vmImage: 'VS2017-Win2016'
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - Functions/*
 steps:
 - task: DotNetCoreCLI@2
   inputs:
@@ -24,7 +31,7 @@ steps:
     rootFolderOrFile: "$(System.DefaultWorkingDirectory)/functions/publish_output"
     includeRootFolder: false
     archiveFile: "$(System.DefaultWorkingDirectory)/functions/build$(Build.BuildId).zip"
-- task: PublishBuildArtifacts@1
+- task: PublishPipelineArtifact@1
   inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)/functions/build$(Build.BuildId).zip'
-    name: 'functins-drop'
+    artifact: 'functions-drop'
+    path: '$(System.DefaultWorkingDirectory)/functions/build$(Build.BuildId).zip'
