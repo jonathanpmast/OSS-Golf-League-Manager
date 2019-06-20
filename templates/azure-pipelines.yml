@@ -28,4 +28,4 @@ steps:
 - task: PublishPipelineArtifact@1
   inputs:
     artifact: 'templates-drop'
-    path: '$(System.DefaultWorkingDirectory)/templates/*.json'
+    path: '$(System.DefaultWorkingDirectory)/templates'
