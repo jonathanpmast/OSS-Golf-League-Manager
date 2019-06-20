@@ -6,7 +6,7 @@ trigger:
     - master
   paths:
     include:
-    - deploy/*
+    - templates/*
 steps:
 - task: AzureResourceGroupDeployment@2
   inputs:
