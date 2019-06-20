@@ -27,4 +27,4 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/functions/build$(Build.BuildId).zip'
-    name: 'drop'
+    name: 'functins-drop'
