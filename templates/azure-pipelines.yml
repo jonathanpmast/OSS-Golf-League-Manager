@@ -9,11 +9,20 @@ trigger:
     - templates/*
 steps:
 - task: AzureResourceGroupDeployment@2
+  displayName: 'Validate ARM Template'
   inputs:
     azureSubscription: $(AZURE_SUBSCRIPTION)
     resourceGroupName: $(RESOURCE_GROUP_NAME)
     location: $(RG_LOCATION)
     templateLocation: Linked artifact
+    csmFile: '/templates/azuredeploy.json'
+    csmParametersFile: '/templates/azuredeploy.parameters.json'
     deploymentMode: Validation
-    csmFile: '/arm/azuredeploy.json'
-    csmParametersFile: '/arm/azuredeploy.parameters.json'
+  condition: always()
+- task: AzureCLI@1
+  displayName: 'Clean up RG'
+  inputs:
+    azureSubscription: $(AZURE_SUBSCRIPTION)
+    scriptLocation: inlineScript
+    inlineScript: 'az group delete -n $(RESOURCE_GROUP_NAME) --yes'
+  
