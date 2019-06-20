@@ -1,14 +1,20 @@
 pool:
       vmImage: 'VS2017-Win2016'
 steps:
-- script: |
-    dotnet restore
-    dotnet build --configuration Release
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: 'Functions/*.csproj'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: 'Functions/*.csproj'
+    arguments: '--configuration Release'
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
     arguments: '--configuration Release --output publish_output'
-    projects: '*.csproj'
+    projects: 'Functions/*.csproj'
     publishWebProjects: false
     modifyOutputPath: true
     zipAfterPublish: false
