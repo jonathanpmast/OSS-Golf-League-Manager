@@ -21,17 +21,18 @@ steps:
   inputs:
     command: publish
     arguments: '--configuration Release --output publish_output'
-    projects: 'Functions/*.csproj'
+    projects: '*.csproj'
     publishWebProjects: false
     modifyOutputPath: true
     zipAfterPublish: false
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Functions'
 - task: ArchiveFiles@2
   displayName: "Archive files"
   inputs:
-    rootFolderOrFile: "$(System.DefaultWorkingDirectory)/functions/publish_output"
+    rootFolderOrFile: "$(System.DefaultWorkingDirectory)/Functions/publish_output"
     includeRootFolder: false
-    archiveFile: "$(System.DefaultWorkingDirectory)/functions/build$(Build.BuildId).zip"
+    archiveFile: "$(System.DefaultWorkingDirectory)/functions_build$(Build.BuildId).zip"
 - task: PublishPipelineArtifact@1
   inputs:
     artifact: 'functions-drop'
-    path: '$(System.DefaultWorkingDirectory)/functions/build$(Build.BuildId).zip'
+    path: '$(System.DefaultWorkingDirectory)/functions_build$(Build.BuildId).zip'
