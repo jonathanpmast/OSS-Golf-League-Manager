@@ -21,7 +21,7 @@ namespace OSSGolfLeagueManager.Functions.Shared
 
         public async Task<List<Player>> GetPlayers()
         {
-            _log.LogInformation("]GetPlayers::Enter");
+            _log.LogInformation("GetPlayers::Enter");
             List<Player> players = new List<Player>();
             SheetsService service = new SheetsService(new BaseClientService.Initializer()
             {
